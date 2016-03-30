@@ -69,6 +69,8 @@ As mentioned earlier, adding guis to edit the time increment and modify the orde
 
 The index controller has not be configured to handle string values in the get query. Of course in a prod environment, this would be disastrous, but given the time, I guess this is okay. One benefit is that SQL Injection shouldn't be an issue.
 
+As far as the relationship of Tasks and Events, I know it would be optimal to have a many-to-many relationship between the two, but with the way that I looped over them, I figured it would be okay to bypass this.
+
 ## Misc.
 
 If you have any other questions about the app, shoot me an email that's listed on my github and I'll help out.

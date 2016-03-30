@@ -1,0 +1,856 @@
+  [1m[36m (266.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (4.9ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateEvents (20160329223641)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (93.0ms)[0m  [1mCREATE TABLE "events" ("id" serial primary key, "name" character varying, "track_ids" integer[] DEFAULT '{}', "start" timestamp, "finish" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160329223641"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreateTracks (20160329223701)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (27.7ms)[0m  [1mCREATE TABLE "tracks" ("id" serial primary key, "name" character varying, "order" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160329223701"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.6ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.9ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'events'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'tracks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.2ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.6ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 4 - Biometrics' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "tracks" ("name", "order", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Track 4 - Biometrics"], ["order", 4], ["created_at", "2016-03-30 20:07:41.522697"], ["updated_at", "2016-03-30 20:07:41.522697"]]
+  [1m[35m (3.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.3ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 1 - Pattern Recognition' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tracks" ("name", "order", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Track 1 - Pattern Recognition"], ["order", 1], ["created_at", "2016-03-30 20:07:41.529211"], ["updated_at", "2016-03-30 20:07:41.529211"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.3ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 2 - Image, Speech, and Signal Processing' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tracks" ("name", "order", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Track 2 - Image, Speech, and Signal Processing"], ["order", 2], ["created_at", "2016-03-30 20:07:41.532597"], ["updated_at", "2016-03-30 20:07:41.532597"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.3ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 3 - Document Analysis' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tracks" ("name", "order", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Track 3 - Document Analysis"], ["order", 3], ["created_at", "2016-03-30 20:07:41.536125"], ["updated_at", "2016-03-30 20:07:41.536125"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.3ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 2 - Image, Speech, and Signal Processing' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mTrack Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 1 - Pattern Recognition' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.2ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 3 - Document Analysis' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mTrack Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 5 - Bioinformatics' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tracks" ("name", "order", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Track 5 - Bioinformatics"], ["order", 5], ["created_at", "2016-03-30 20:07:41.599343"], ["updated_at", "2016-03-30 20:07:41.599343"]]
+  [1m[36m (1.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mTrack Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 2 - Image, Speech, and Signal Processing' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.2ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 5 - Bioinformatics' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mTrack Exists (1.2ms)[0m  [1mSELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 2 - Image, Speech, and Signal Processing' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.3ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 1 - Pattern Recognition' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mTrack Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 2 - Image, Speech, and Signal Processing' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.2ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 1 - Pattern Recognition' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mTrack Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 1 - Pattern Recognition' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mTrack Exists (0.2ms)[0m  SELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 1 - Pattern Recognition' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mTrack Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "tracks" WHERE "tracks"."name" = 'Track 2 - Image, Speech, and Signal Processing' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Keynote"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Monday Plenary Session 1"], ["start", "2015-12-08 07:00:00.000000"], ["finish", "2015-12-08 07:45:00.000000"], ["track_ids", "{1,2,3,4,5}"], ["created_at", "2016-03-30 20:07:41.673320"], ["updated_at", "2016-03-30 20:07:41.673320"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Coffee Breaks"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Coffee Break"], ["start", "2015-12-08 07:45:00.000000"], ["finish", "2015-12-08 08:00:00.000000"], ["track_ids", "{1,2,3,4,5}"], ["created_at", "2016-03-30 20:07:41.677846"], ["updated_at", "2016-03-30 20:07:41.677846"]]
+  [1m[35m (1.4ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 4 - Biometrics"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "An Introduction to Biometrics"], ["start", "2015-12-08 08:00:00.000000"], ["finish", "2015-12-08 09:00:00.000000"], ["track_ids", "{1}"], ["created_at", "2016-03-30 20:07:41.682150"], ["updated_at", "2016-03-30 20:07:41.682150"]]
+  [1m[35m (2.5ms)[0m  COMMIT
+  [1m[36mTrack Load (0.7ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 1 - Pattern Recognition"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T3P4OR3 Segmentation and Registration"], ["start", "2015-12-08 08:00:00.000000"], ["finish", "2015-12-08 09:50:00.000000"], ["track_ids", "{2}"], ["created_at", "2016-03-30 20:07:41.690523"], ["updated_at", "2016-03-30 20:07:41.690523"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 2 - Image, Speech, and Signal Processing"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Image Computing for Digital Pathology"], ["start", "2015-12-08 08:00:00.000000"], ["finish", "2015-12-08 08:45:00.000000"], ["track_ids", "{3}"], ["created_at", "2016-03-30 20:07:41.694159"], ["updated_at", "2016-03-30 20:07:41.694159"]]
+  [1m[35m (1.7ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 3 - Document Analysis"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Similarity Searching"], ["start", "2015-12-08 08:00:00.000000"], ["finish", "2015-12-08 09:15:00.000000"], ["track_ids", "{4}"], ["created_at", "2016-03-30 20:07:41.704656"], ["updated_at", "2016-03-30 20:07:41.704656"]]
+  [1m[35m (1.7ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 2 - Image, Speech, and Signal Processing"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Semantic Indexing and Retrieval of Video"], ["start", "2015-12-08 09:00:00.000000"], ["finish", "2015-12-08 10:00:00.000000"], ["track_ids", "{3}"], ["created_at", "2016-03-30 20:07:41.708607"], ["updated_at", "2016-03-30 20:07:41.708607"]]
+  [1m[35m (1.5ms)[0m  COMMIT
+  [1m[36mTrack Load (0.1ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Lunch"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Lunch"], ["start", "2015-12-08 10:00:00.000000"], ["finish", "2015-12-08 11:00:00.000000"], ["track_ids", "{1,2,3,4,5}"], ["created_at", "2016-03-30 20:07:41.712509"], ["updated_at", "2016-03-30 20:07:41.712509"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 1 - Pattern Recognition"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Advanced Techniques for Face-Based Biometrics"], ["start", "2015-12-08 11:00:00.000000"], ["finish", "2015-12-08 13:30:00.000000"], ["track_ids", "{2}"], ["created_at", "2016-03-30 20:07:41.716635"], ["updated_at", "2016-03-30 20:07:41.716635"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 3 - Document Analysis"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T5P4OR2 Document Analysis and Recognition"], ["start", "2015-12-08 11:00:00.000000"], ["finish", "2015-12-08 13:20:00.000000"], ["track_ids", "{4}"], ["created_at", "2016-03-30 20:07:41.721963"], ["updated_at", "2016-03-30 20:07:41.721963"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 5 - Bioinformatics"]]
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T6P3OR2a Bioinformatics and Biomedical Applications"], ["start", "2015-12-08 11:00:00.000000"], ["finish", "2015-12-08 12:00:00.000000"], ["track_ids", "{5}"], ["created_at", "2016-03-30 20:07:41.726497"], ["updated_at", "2016-03-30 20:07:41.726497"]]
+  [1m[35m (1.6ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 2 - Image, Speech, and Signal Processing"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "The Algebraic Approaches and Techniques in Image Analysis"], ["start", "2015-12-08 11:30:00.000000"], ["finish", "2015-12-08 13:00:00.000000"], ["track_ids", "{3}"], ["created_at", "2016-03-30 20:07:41.731233"], ["updated_at", "2016-03-30 20:07:41.731233"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 5 - Bioinformatics"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T6P4OR2 Bioinformatics and Biomedical Applications"], ["start", "2015-12-08 12:00:00.000000"], ["finish", "2015-12-08 13:00:00.000000"], ["track_ids", "{5}"], ["created_at", "2016-03-30 20:07:41.735175"], ["updated_at", "2016-03-30 20:07:41.735175"]]
+  [1m[35m (4.5ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Coffee Breaks"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Coffee Break"], ["start", "2015-12-08 13:30:00.000000"], ["finish", "2015-12-08 14:00:00.000000"], ["track_ids", "{1,2,3,4,5}"], ["created_at", "2016-03-30 20:07:41.742334"], ["updated_at", "2016-03-30 20:07:41.742334"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Coffee Breaks"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Poster Session MoBT8"], ["start", "2015-12-08 14:00:00.000000"], ["finish", "2015-12-08 16:00:00.000000"], ["track_ids", "{1,2,3,4,5}"], ["created_at", "2016-03-30 20:07:41.746105"], ["updated_at", "2016-03-30 20:07:41.746105"]]
+  [1m[35m (1.7ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Party"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "A night at the acquarium"], ["start", "2015-12-08 16:30:00.000000"], ["finish", "2015-12-08 19:30:00.000000"], ["track_ids", "{1,2,3,4,5}"], ["created_at", "2016-03-30 20:07:41.750788"], ["updated_at", "2016-03-30 20:07:41.750788"]]
+  [1m[35m (6.9ms)[0m  COMMIT
+  [1m[36mTrack Load (0.3ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 2 - Image, Speech, and Signal Processing"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Image Retrieval"], ["start", "2015-12-09 07:00:00.000000"], ["finish", "2015-12-09 07:45:00.000000"], ["track_ids", "{3}"], ["created_at", "2016-03-30 20:07:41.760608"], ["updated_at", "2016-03-30 20:07:41.760608"]]
+  [1m[35m (1.4ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 1 - Pattern Recognition"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T1P3OR5 Image Modelling and Scene Understanding"], ["start", "2015-12-09 07:00:00.000000"], ["finish", "2015-12-09 08:30:00.000000"], ["track_ids", "{2}"], ["created_at", "2016-03-30 20:07:41.764340"], ["updated_at", "2016-03-30 20:07:41.764340"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36mTrack Load (0.3ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 2 - Image, Speech, and Signal Processing"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T1P4OR8 Motion, Tracking, Video Analysis"], ["start", "2015-12-09 07:45:00.000000"], ["finish", "2015-12-09 08:30:00.000000"], ["track_ids", "{3}"], ["created_at", "2016-03-30 20:07:41.768648"], ["updated_at", "2016-03-30 20:07:41.768648"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 1 - Pattern Recognition"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T2P3OR5a Clustering"], ["start", "2015-12-09 08:30:00.000000"], ["finish", "2015-12-09 10:00:00.000000"], ["track_ids", "{2}"], ["created_at", "2016-03-30 20:07:41.772769"], ["updated_at", "2016-03-30 20:07:41.772769"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Coffee Breaks"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Coffee Break"], ["start", "2015-12-09 08:30:00.000000"], ["finish", "2015-12-09 09:00:00.000000"], ["track_ids", "{1,2,3,4,5}"], ["created_at", "2016-03-30 20:07:41.776400"], ["updated_at", "2016-03-30 20:07:41.776400"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 1 - Pattern Recognition"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T2P4OR5 Classification and Clustering"], ["start", "2015-12-09 08:30:00.000000"], ["finish", "2015-12-09 09:15:00.000000"], ["track_ids", "{2}"], ["created_at", "2016-03-30 20:07:41.780742"], ["updated_at", "2016-03-30 20:07:41.780742"]]
+  [1m[35m (4.3ms)[0m  COMMIT
+  [1m[36mTrack Load (0.4ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 1 - Pattern Recognition"]]
+  [1m[35m (4.6ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T7P4OR2 Face Recognition"], ["start", "2015-12-09 09:00:00.000000"], ["finish", "2015-12-09 10:00:00.000000"], ["track_ids", "{2}"], ["created_at", "2016-03-30 20:07:41.792836"], ["updated_at", "2016-03-30 20:07:41.792836"]]
+  [1m[35m (1.6ms)[0m  COMMIT
+  [1m[36mTrack Load (0.2ms)[0m  [1mSELECT  "tracks".* FROM "tracks" WHERE "tracks"."name" = $1 LIMIT 1[0m  [["name", "Track 2 - Image, Speech, and Signal Processing"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "start", "finish", "track_ids", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "T4P3OR1 Multimedia Processing and Content-Based Information Retrieval"], ["start", "2015-12-09 09:15:00.000000"], ["finish", "2015-12-09 10:00:00.000000"], ["track_ids", "{3}"], ["created_at", "2016-03-30 20:07:41.796875"], ["updated_at", "2016-03-30 20:07:41.796875"]]
+  [1m[35m (1.4ms)[0m  COMMIT
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-30 15:07:57 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by EventController#index as HTML
+  [1m[35mTrack Load (0.9ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (1.9ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = 90 and EXTRACT(YEAR FROM start) = 2016)[0m
+  Rendered event/index.html.erb (9.7ms)
+Completed 200 OK in 106ms (Views: 44.8ms | ActiveRecord: 7.5ms)
+
+
+Started GET "/?day=89&year=2016" for 127.0.0.1 at 2016-03-30 15:08:02 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"89", "year"=>"2016"}
+  [1m[35mTrack Load (0.6ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '89' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/?day=88&year=2016" for 127.0.0.1 at 2016-03-30 15:08:04 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"88", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '88' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 5ms (Views: 1.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=88&year=2016" for 127.0.0.1 at 2016-03-30 15:08:18 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"88", "year"=>"2016"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '88' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=330&year=2015" for 127.0.0.1 at 2016-03-30 15:09:00 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"330", "year"=>"2015"}
+  [1m[35mTrack Load (0.6ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.9ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '330' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/?day=331&year=2015" for 127.0.0.1 at 2016-03-30 15:09:03 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"331", "year"=>"2015"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.5ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '331' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/?day=332&year=2015" for 127.0.0.1 at 2016-03-30 15:09:04 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"332", "year"=>"2015"}
+  [1m[35mTrack Load (0.5ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '332' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 18ms (Views: 14.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/?day=333&year=2015" for 127.0.0.1 at 2016-03-30 15:09:04 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"333", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '333' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=334&year=2015" for 127.0.0.1 at 2016-03-30 15:09:05 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"334", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '334' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.7ms)
+Completed 200 OK in 5ms (Views: 2.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=335&year=2015" for 127.0.0.1 at 2016-03-30 15:09:05 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"335", "year"=>"2015"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '335' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=336&year=2015" for 127.0.0.1 at 2016-03-30 15:09:06 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"336", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '336' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=337&year=2015" for 127.0.0.1 at 2016-03-30 15:09:07 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"337", "year"=>"2015"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '337' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 6ms (Views: 3.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=338&year=2015" for 127.0.0.1 at 2016-03-30 15:09:07 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"338", "year"=>"2015"}
+  [1m[35mTrack Load (0.5ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '338' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/?day=339&year=2015" for 127.0.0.1 at 2016-03-30 15:09:08 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"339", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '339' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=340&year=2015" for 127.0.0.1 at 2016-03-30 15:09:08 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"340", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '340' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=341&year=2015" for 127.0.0.1 at 2016-03-30 15:09:09 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"341", "year"=>"2015"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.5ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '341' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 6ms (Views: 2.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:09:09 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1092.1ms)
+Completed 200 OK in 1103ms (Views: 1097.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:09:47 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.9ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (2.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1135.8ms)
+Completed 200 OK in 1148ms (Views: 1139.5ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:27:13 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1169.0ms)
+Completed 200 OK in 1191ms (Views: 1187.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:28:58 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1120.3ms)
+Completed 200 OK in 1125ms (Views: 1122.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:29:03 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1049.5ms)
+Completed 200 OK in 1054ms (Views: 1050.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:29:12 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1112.8ms)
+Completed 200 OK in 1116ms (Views: 1113.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:29:21 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1121.6ms)
+Completed 200 OK in 1125ms (Views: 1122.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:29:38 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1141.3ms)
+Completed 200 OK in 1145ms (Views: 1142.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 66.162.215.98 at 2016-03-30 15:30:31 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = 90 and EXTRACT(YEAR FROM start) = 2016)[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=89&year=2016" for 66.162.215.98 at 2016-03-30 15:30:40 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"89", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '89' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=88&year=2016" for 66.162.215.98 at 2016-03-30 15:30:40 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"88", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '88' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=87&year=2016" for 66.162.215.98 at 2016-03-30 15:30:40 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"87", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '87' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=86&year=2016" for 66.162.215.98 at 2016-03-30 15:30:40 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"86", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '86' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=85&year=2016" for 66.162.215.98 at 2016-03-30 15:30:41 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"85", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '85' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=84&year=2016" for 66.162.215.98 at 2016-03-30 15:30:41 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"84", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '84' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=83&year=2016" for 66.162.215.98 at 2016-03-30 15:30:41 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"83", "year"=>"2016"}
+  [1m[35mTrack Load (0.2ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '83' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=82&year=2016" for 66.162.215.98 at 2016-03-30 15:30:41 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"82", "year"=>"2016"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '82' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=81&year=2016" for 66.162.215.98 at 2016-03-30 15:30:41 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"81", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '81' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (1.0ms)
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=80&year=2016" for 66.162.215.98 at 2016-03-30 15:30:41 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"80", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '80' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=79&year=2016" for 66.162.215.98 at 2016-03-30 15:30:42 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"79", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '79' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=78&year=2016" for 66.162.215.98 at 2016-03-30 15:30:42 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"78", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '78' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=77&year=2016" for 66.162.215.98 at 2016-03-30 15:30:42 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"77", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '77' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=76&year=2016" for 66.162.215.98 at 2016-03-30 15:30:42 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"76", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '76' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=75&year=2016" for 66.162.215.98 at 2016-03-30 15:30:42 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"75", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '75' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=74&year=2016" for 66.162.215.98 at 2016-03-30 15:30:42 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"74", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '74' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=73&year=2016" for 66.162.215.98 at 2016-03-30 15:30:43 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"73", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '73' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=72&year=2016" for 66.162.215.98 at 2016-03-30 15:30:43 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"72", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '72' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=71&year=2016" for 66.162.215.98 at 2016-03-30 15:30:43 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"71", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '71' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.7ms)
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=70&year=2016" for 66.162.215.98 at 2016-03-30 15:30:43 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"70", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '70' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=69&year=2016" for 66.162.215.98 at 2016-03-30 15:30:43 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"69", "year"=>"2016"}
+  [1m[35mTrack Load (0.2ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '69' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/?day=68&year=2016" for 66.162.215.98 at 2016-03-30 15:30:44 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"68", "year"=>"2016"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '68' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.5ms)
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=67&year=2016" for 66.162.215.98 at 2016-03-30 15:30:44 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"67", "year"=>"2016"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '67' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=66&year=2016" for 66.162.215.98 at 2016-03-30 15:30:44 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"66", "year"=>"2016"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '66' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.6ms)
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=65&year=2016" for 66.162.215.98 at 2016-03-30 15:30:44 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"65", "year"=>"2016"}
+  [1m[35mTrack Load (0.2ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '65' and EXTRACT(YEAR FROM start) = '2016')[0m
+  Rendered event/index.html.erb (0.7ms)
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/?day=342&year=2015" for 66.162.215.98 at 2016-03-30 15:30:49 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1015.5ms)
+Completed 200 OK in 1019ms (Views: 1016.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:31:26 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.5ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1058.8ms)
+Completed 200 OK in 1063ms (Views: 1060.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:31:45 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1075.3ms)
+Completed 200 OK in 1080ms (Views: 1076.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:32:18 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1072.4ms)
+Completed 200 OK in 1076ms (Views: 1073.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:32:35 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb (1075.7ms)
+Completed 200 OK in 1080ms (Views: 1077.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:32:50 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb within layouts/application (1049.8ms)
+Completed 200 OK in 1928ms (Views: 1925.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/event.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-30 15:32:52 -0500
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-30 15:32:52 -0500
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-30 15:32:52 -0500
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-30 15:32:52 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-30 15:32:52 -0500
+
+
+Started GET "/assets/event.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-30 15:32:52 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-03-30 15:32:52 -0500
+
+
+Started GET "/?day=343&year=2015" for 127.0.0.1 at 2016-03-30 15:33:04 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"343", "year"=>"2015"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '343' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb within layouts/application (359.5ms)
+Completed 200 OK in 373ms (Views: 369.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=342&year=2015" for 66.162.215.98 at 2016-03-30 15:33:06 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb within layouts/application (997.5ms)
+Completed 200 OK in 1012ms (Views: 1009.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/event.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 66.162.215.98 at 2016-03-30 15:33:07 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 66.162.215.98 at 2016-03-30 15:33:07 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 66.162.215.98 at 2016-03-30 15:33:07 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 66.162.215.98 at 2016-03-30 15:33:07 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/event.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 66.162.215.98 at 2016-03-30 15:33:07 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 66.162.215.98 at 2016-03-30 15:33:07 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 66.162.215.98 at 2016-03-30 15:33:07 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/?day=343&year=2015" for 66.162.215.98 at 2016-03-30 15:33:14 -0500
+Cannot render console from 66.162.215.98! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"343", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '343' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb within layouts/application (358.2ms)
+Completed 200 OK in 380ms (Views: 377.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:33:24 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (1.0ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.6ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb within layouts/application (1076.5ms)
+Completed 200 OK in 1091ms (Views: 1086.6ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:33:35 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.4ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb within layouts/application (1137.0ms)
+Completed 200 OK in 1154ms (Views: 1150.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/event.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-03-30 15:33:36 -0500
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-03-30 15:33:36 -0500
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-03-30 15:33:36 -0500
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-03-30 15:33:36 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-03-30 15:33:36 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-03-30 15:33:36 -0500
+
+
+Started GET "/assets/event.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-03-30 15:33:36 -0500
+
+
+Started GET "/?day=343&year=2015" for 127.0.0.1 at 2016-03-30 15:34:13 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"343", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '343' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb within layouts/application (390.7ms)
+Completed 200 OK in 417ms (Views: 414.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/?day=342&year=2015" for 127.0.0.1 at 2016-03-30 15:34:16 -0500
+Processing by EventController#index as HTML
+  Parameters: {"day"=>"342", "year"=>"2015"}
+  [1m[35mTrack Load (0.3ms)[0m  SELECT "tracks".* FROM "tracks"  ORDER BY "tracks"."order" ASC
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events" WHERE (EXTRACT(DOY FROM start) = '342' and EXTRACT(YEAR FROM start) = '2015')[0m
+  Rendered event/index.html.erb within layouts/application (1064.2ms)
+Completed 200 OK in 1085ms (Views: 1081.6ms | ActiveRecord: 0.7ms)
+  [1m[36mEvent Load (14.9ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."name" = $1 LIMIT 1[0m  [["name", "T3P4OR3 Segmentation and Registration"]]

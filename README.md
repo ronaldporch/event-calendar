@@ -67,6 +67,8 @@ Heavier reliance on BDD will also help the application. Since the controllers an
 
 As mentioned earlier, adding guis to edit the time increment and modify the order of the tracks would be a nice to have feature.
 
+The index controller has not be configured to handle string values in the get query. Of course in a prod environment, this would be disastrous, but given the time, I guess this is okay. One benefit is that SQL Injection shouldn't be an issue.
+
 ## Misc.
 
 If you have any other questions about the app, shoot me an email that's listed on my github and I'll help out.
